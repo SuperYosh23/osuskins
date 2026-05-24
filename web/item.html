@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SuperYosh's osu! Workshop - Item</title>
+    <link rel="icon" type="image/x-icon" href="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.wikia.nocookie.net%2Fosugame%2Fimages%2F4%2F41%2FOsu_new_logo.png%2Frevision%2Flatest%3Fcb%3D20220105150330&f=1&nofb=1&ipt=7e9e0474fc2a67a09ff4d4abab2d8db1b6e90b7983d7b03f3db6e8272c85ce8f">
+    <link rel="stylesheet" href="viso.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,600;0,800;1,800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #09090b;
+            overflow-x: hidden;
+            cursor: none !important;
+            --viso-accent: #ec4899;
+            --viso-accent-dim: #db2777;
+            --viso-accent-glow: rgba(236, 72, 153, 0.4);
+        }
+
+        * { cursor: none !important; }
+        
+        h1, h2, h3, .brand-font { font-family: 'Exo 2', sans-serif; }
+
+        #custom-cursor {
+            position: fixed;
+            top: 0; left: 0;
+            z-index: 100000;
+            pointer-events: none; 
+            will-change: transform; 
+            transform: translate3d(-100px, -100px, 0); 
+        }
+
+        #cursor-scaler {
+            transition: transform 0.1s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: scale(1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        #custom-cursor.active #cursor-scaler {
+            transform: scale(1.3); 
+        }
+
+        #custom-cursor.clicking #cursor-scaler {
+            transform: scale(0.75) !important;
+        }
+
+        #cursor-img {
+            width: 80px; 
+            height: auto;
+            animation: osuSpin 10s linear infinite; 
+        }
+
+        #cursor-crosshair {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 10px; height: 10px;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        
+        #cursor-crosshair::before, #cursor-crosshair::after {
+            content: '';
+            position: absolute;
+            background: white;
+            box-shadow: 0 0 4px rgba(0,0,0,0.5);
+            border-radius: 2px;
+        }
+
+        #cursor-crosshair::before {
+            top: 4px; left: 0; width: 10px; height: 2px;
+        }
+
+        #cursor-crosshair::after {
+            top: 0; left: 4px; width: 2px; height: 10px;
+        }
+
+        @keyframes osuSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        #trail-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 99999;
+        }
+
+        .area {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            background: #09090b;
+            background: radial-gradient(circle at center, #18181b 0%, #000000 100%);
+            z-index: -1;
+            pointer-events: none; 
+        }
+
+        .circles {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden; margin: 0; padding: 0;
+        }
+
+        .circles li {
+            position: absolute; display: block; list-style: none;
+            width: 20px; height: 20px;
+            background: rgba(255, 102, 170, 0.15); 
+            animation: animate 25s linear infinite;
+            bottom: -150px;
+        }
+
+        @keyframes animate {
+            0%{ transform: translateY(0) rotate(0deg); opacity: 1; }
+            100%{ transform: translateY(-1000px) rotate(720deg); opacity: 0; }
+        }
+        
+        .circles li:nth-child(1){ left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
+        .circles li:nth-child(2){ left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; background: rgba(59, 130, 246, 0.15); }
+        .circles li:nth-child(3){ left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
+        .circles li:nth-child(4){ left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; background: rgba(168, 85, 247, 0.15); }
+        .circles li:nth-child(5){ left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
+        .circles li:nth-child(6){ left: 75%; width: 110px; height: 110px; animation-delay: 3s; }
+        .circles li:nth-child(7){ left: 35%; width: 150px; height: 150px; animation-delay: 7s; }
+        .circles li:nth-child(8){ left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
+        .circles li:nth-child(9){ left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; }
+        .circles li:nth-child(10){ left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 11s; }
+
+        .solid-panel {
+            background: rgba(15, 15, 18, 0.95);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px) saturate(180%);
+        }
+        
+        .solid-card {
+            background: rgba(22, 27, 34, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(48, 54, 61, 0.6);
+            border-radius: 12px;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .solid-card:hover {
+            border-color: rgba(236, 72, 153, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 20px rgba(236, 72, 153, 0.2);
+        }
+
+        #image-modal { 
+            background-color: rgba(0, 0, 0, 0.95); 
+            opacity: 0;
+            pointer-events: none; 
+            transition: opacity 0.2s ease;
+            display: flex; 
+        }
+        
+        #image-modal.show-modal { 
+            opacity: 1; 
+            pointer-events: auto; 
+        }
+    </style>
+</head>
+<body data-theme="viso" class="selection:bg-pink-500 selection:text-white">
+
+    <canvas id="trail-canvas"></canvas>
+
+    <div id="custom-cursor">
+        <div id="cursor-scaler">
+            <img src="cursor.png" id="cursor-img" alt="cursor">
+        </div>
+        <div id="cursor-crosshair"></div>
+    </div>
+
+    <div class="area">
+        <ul class="circles">
+            <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+        </ul>
+    </div>
+
+    <div id="image-modal" class="fixed inset-0 z-[100] items-center justify-center p-4" onclick="app.closeImage()">
+        <div class="relative max-w-5xl w-full">
+            <button class="absolute -top-10 right-0 text-white hover:text-pink-500 text-xl font-bold transition-colors">CLOSE [X]</button>
+            <img id="modal-img" src="" class="w-full h-auto rounded border border-white/10 bg-zinc-900">
+            <p id="modal-caption" class="text-center mt-4 text-pink-400 font-mono font-bold tracking-widest uppercase"></p>
+        </div>
+    </div>
+
+    <nav class="fixed w-full z-50 solid-panel">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <a href="index.html" class="text-xl font-bold tracking-wider italic uppercase text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">SuperYosh's osu! Workshop</a>
+            </div>
+            <div class="flex gap-4 text-sm font-semibold text-zinc-400" id="nav-socials"></div>
+        </div>
+    </nav>
+
+    <header class="relative pt-40 pb-20 px-6 text-center z-10">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-pink-600/10 rounded-full blur-[60px] -z-10 pointer-events-none"></div>
+
+        <h1 id="item-title" class="font-black italic tracking-tighter mb-4 text-white" style="font-size: clamp(3rem, 10vw, 8rem); line-height: 0.85;">
+            Loading...
+        </h1>
+        
+        <p id="item-type" class="text-xl md:text-2xl text-zinc-300 max-w-2xl mx-auto font-light"></p>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 pb-24 z-10 relative">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="solid-card overflow-hidden">
+                <div id="item-image-container" class="h-96 relative overflow-hidden bg-zinc-900 border-b border-white/5 cursor-pointer" onclick="app.openImage()">
+                    <img id="item-image" src="" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                </div>
+            </div>
+            
+            <div class="solid-card p-8 flex flex-col">
+                <h2 class="text-2xl font-bold text-white mb-4 italic">Description</h2>
+                <p id="item-desc" class="text-zinc-400 text-lg leading-relaxed mb-6"></p>
+                
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold text-white mb-3 italic">Tags</h3>
+                    <div id="item-tags" class="flex flex-wrap gap-2"></div>
+                </div>
+                
+                <div class="mt-auto pt-6 border-t border-white/5">
+                    <a id="item-link" href="" target="_blank" class="viso-btn viso-btn-primary w-full text-center text-lg py-4">
+                        Download
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-12">
+            <a href="index.html" class="viso-btn viso-btn-secondary inline-flex items-center gap-2">
+                ← Back to All Items
+            </a>
+        </div>
+    </main>
+
+    <footer class="max-w-7xl mx-auto px-6 pb-8 pt-16 text-center">
+        <div class="viso-card-solid py-8 px-6">
+            <p class="text-zinc-400 text-sm mb-4">
+                <strong class="text-white">DISCLAIMER:</strong> I used AI to help make most of this site.
+            </p>
+            <div class="viso-divider"></div>
+            <p class="text-zinc-500 text-sm">
+                This page uses the <a href="https://github.com/SuperYosh23/VisoDesign" target="_blank" class="text-pink-400 hover:text-pink-300 transition-colors font-semibold">Viso</a> design system.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const cursor = document.getElementById('custom-cursor');
+        const canvas = document.getElementById('trail-canvas');
+        const ctx = canvas.getContext('2d');
+        const offset = 40;
+        
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+        
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        let mouseX = -100;
+        let mouseY = -100;
+        let isHovering = false;
+        const trailPoints = [];
+        const trailLength = 30;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            const target = e.target;
+            if (target.tagName === 'A' || target.tagName === 'BUTTON' || target.closest('.card-hover') || target.closest('.solid-card')) {
+                if (!isHovering) {
+                    isHovering = true;
+                    cursor.classList.add('active');
+                }
+            } else {
+                if (isHovering) {
+                    isHovering = false;
+                    cursor.classList.remove('active');
+                }
+            }
+        });
+
+        document.addEventListener('mousedown', () => {
+            cursor.classList.add('clicking');
+        });
+        document.addEventListener('mouseup', () => {
+            cursor.classList.remove('clicking');
+        });
+
+        let currentX = -100;
+        let currentY = -100;
+
+        function render() {
+            const lerp = 1.0; 
+            currentX += (mouseX - offset - currentX) * lerp;
+            currentY += (mouseY - offset - currentY) * lerp;
+            
+            cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+
+            const centerX = currentX + offset;
+            const centerY = currentY + offset;
+
+            trailPoints.push({ x: centerX, y: centerY });
+            
+            if (trailPoints.length > trailLength) {
+                trailPoints.shift();
+            }
+
+            ctx.clearRect(0, 0, width, height);
+
+            ctx.beginPath();
+            ctx.lineJoin = 'round';
+            ctx.lineCap = 'round';
+            
+            for (let i = 0; i < trailPoints.length - 1; i++) {
+                const p1 = trailPoints[i];
+                const p2 = trailPoints[i + 1];
+                
+                ctx.beginPath();
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                
+                const opacity = i / trailPoints.length;
+                
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+                ctx.stroke();
+            }
+
+            requestAnimationFrame(render);
+        }
+        render();
+
+        const app = {
+            init: async () => {
+                const urlParams = new URLSearchParams(window.location.search);
+                const itemId = urlParams.get('id');
+                
+                if (!itemId) {
+                    window.location.href = 'index.html';
+                    return;
+                }
+                
+                try {
+                    const response = await fetch('items.json');
+                    const data = await response.json();
+                    const item = data.items.find(i => i.id === itemId);
+                    
+                    if (!item) {
+                        window.location.href = 'index.html';
+                        return;
+                    }
+                    
+                    app.renderItem(item);
+                } catch (error) {
+                    console.error('Error loading item:', error);
+                    window.location.href = 'index.html';
+                }
+            },
+
+            renderItem: (item) => {
+                document.getElementById('item-title').innerText = item.title;
+                
+                const typeDisplay = Array.isArray(item.type) ? item.type.join(' + ') : item.type;
+                document.getElementById('item-type').innerText = typeDisplay;
+                
+                document.getElementById('item-desc').innerText = item.desc;
+                
+                const imageEl = document.getElementById('item-image');
+                if (item.image && item.image.length > 5) {
+                    imageEl.src = item.image;
+                    imageEl.style.display = 'block';
+                } else {
+                    imageEl.style.display = 'none';
+                }
+                
+                const tagsContainer = document.getElementById('item-tags');
+                tagsContainer.innerHTML = '';
+                if (item.tags && Array.isArray(item.tags)) {
+                    item.tags.forEach(tag => {
+                        const tagEl = document.createElement('span');
+                        tagEl.className = 'viso-badge';
+                        tagEl.innerText = tag;
+                        tagsContainer.appendChild(tagEl);
+                    });
+                }
+                
+                const linkEl = document.getElementById('item-link');
+                linkEl.href = item.link;
+                linkEl.innerText = item.btnText || 'Download';
+                
+                app.currentImage = item.image;
+                app.currentTitle = item.title;
+            },
+
+            openImage: () => {
+                if (!app.currentImage) return;
+                const modal = document.getElementById('image-modal');
+                document.getElementById('modal-img').src = app.currentImage;
+                document.getElementById('modal-caption').innerText = app.currentTitle;
+                modal.classList.add('show-modal');
+            },
+
+            closeImage: () => {
+                const modal = document.getElementById('image-modal');
+                modal.classList.remove('show-modal');
+                setTimeout(() => { document.getElementById('modal-img').src = ""; }, 200);
+            }
+        };
+
+        app.init();
+    </script>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page not found</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,600;0,800;1,800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CORE SETTINGS --- */
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #09090b;
+            overflow: hidden; /* No scrolling on 404 page */
+            cursor: none !important; 
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Force hide cursor on everything */
+        * { cursor: none !important; }
+        
+        h1, h2, h3, .brand-font { font-family: 'Exo 2', sans-serif; }
+
+        /* --- CURSOR ENGINE (Identical to Home) --- */
+        #custom-cursor {
+            position: fixed;
+            top: 0; left: 0;
+            z-index: 100000;
+            pointer-events: none; 
+            will-change: transform; 
+            transform: translate3d(-100px, -100px, 0); 
+        }
+
+        #cursor-scaler {
+            transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: scale(1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        #cursor-img {
+            width: 80px; 
+            height: auto;
+            animation: osuSpin 10s linear infinite; 
+        }
+
+        #cursor-crosshair {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 10px; height: 10px;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        
+        #cursor-crosshair::before, #cursor-crosshair::after {
+            content: '';
+            position: absolute;
+            background: white;
+            box-shadow: 0 0 4px rgba(0,0,0,0.5);
+            border-radius: 2px;
+        }
+        #cursor-crosshair::before { top: 4px; left: 0; width: 10px; height: 2px; }
+        #cursor-crosshair::after { top: 0; left: 4px; width: 2px; height: 10px; }
+
+        #custom-cursor.active #cursor-scaler { transform: scale(1.3); }
+
+        @keyframes osuSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* --- TRAIL CANVAS --- */
+        #trail-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 99999;
+        }
+
+        /* --- BACKGROUND --- */
+        .area {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            background: #09090b;
+            background: radial-gradient(circle at center, #18181b 0%, #000000 100%);
+            z-index: -1;
+            pointer-events: none; 
+        }
+
+        .circles {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden; margin: 0; padding: 0;
+        }
+
+        .circles li {
+            position: absolute; display: block; list-style: none;
+            width: 20px; height: 20px;
+            background: rgba(255, 102, 170, 0.15); 
+            animation: animate 25s linear infinite;
+            bottom: -150px;
+        }
+
+        @keyframes animate {
+            0%{ transform: translateY(0) rotate(0deg); opacity: 1; }
+            100%{ transform: translateY(-1000px) rotate(720deg); opacity: 0; }
+        }
+        
+        .circles li:nth-child(1){ left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
+        .circles li:nth-child(2){ left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; background: rgba(59, 130, 246, 0.15); }
+        .circles li:nth-child(3){ left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
+        .circles li:nth-child(4){ left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; background: rgba(168, 85, 247, 0.15); }
+        .circles li:nth-child(5){ left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
+        .circles li:nth-child(6){ left: 75%; width: 110px; height: 110px; animation-delay: 3s; }
+        .circles li:nth-child(7){ left: 35%; width: 150px; height: 150px; animation-delay: 7s; }
+    </style>
+</head>
+<body class="text-zinc-200 selection:bg-pink-500 selection:text-white">
+
+    <canvas id="trail-canvas"></canvas>
+
+    <div id="custom-cursor">
+        <div id="cursor-scaler">
+            <img src="cursor.png" id="cursor-img" alt="cursor">
+        </div>
+        <div id="cursor-crosshair"></div>
+    </div>
+
+    <div class="area">
+        <ul class="circles">
+            <li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+        </ul>
+    </div>
+
+    <div class="relative z-10 text-center max-w-2xl px-6">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-red-600/20 rounded-full blur-[80px] -z-10 pointer-events-none"></div>
+
+        <h1 class="text-9xl font-black italic tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-red-500 to-red-900 mb-0 leading-none">
+            MISS
+        </h1>
+        <h2 class="text-4xl font-bold italic text-white mb-6">404 - Page not found</h2>
+        
+        <p class="text-zinc-400 text-lg mb-10">
+            You tried to go to a page that dosen't exist. The URL might be broken, check ur spelling idk.
+        </p>
+
+        <a href="/" class="interactive-btn inline-block px-10 py-4 bg-pink-600 hover:bg-pink-500 text-white font-extrabold text-xl uppercase tracking-widest rounded shadow-lg shadow-pink-900/40 hover:shadow-pink-500/60 hover:-translate-y-1 transition-all duration-200 skew-x-[-10deg]">
+            <span class="block skew-x-[10deg]">Back to Home</span>
+        </a>
+    </div>
+
+    <script>
+        // --- CURSOR ENGINE (Identical to Main Site) ---
+        const cursor = document.getElementById('custom-cursor');
+        const canvas = document.getElementById('trail-canvas');
+        const ctx = canvas.getContext('2d');
+        const offset = 40; 
+        
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+        
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        let mouseX = -100, mouseY = -100;
+        let isHovering = false;
+        const trailPoints = [];
+        const trailLength = 30; 
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            // Simplified Hover for 404 page (only checks links)
+            if (e.target.closest('a')) {
+                if (!isHovering) {
+                    isHovering = true;
+                    cursor.classList.add('active');
+                }
+            } else {
+                if (isHovering) {
+                    isHovering = false;
+                    cursor.classList.remove('active');
+                }
+            }
+        });
+
+        let currentX = -100, currentY = -100;
+
+        function render() {
+            const lerp = 1.0; 
+            currentX += (mouseX - offset - currentX) * lerp;
+            currentY += (mouseY - offset - currentY) * lerp;
+            
+            cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+
+            // Trail Logic
+            const centerX = currentX + offset;
+            const centerY = currentY + offset;
+
+            trailPoints.push({ x: centerX, y: centerY });
+            if (trailPoints.length > trailLength) trailPoints.shift();
+
+            ctx.clearRect(0, 0, width, height);
+
+            ctx.beginPath();
+            ctx.lineJoin = 'round';
+            ctx.lineCap = 'round';
+            
+            for (let i = 0; i < trailPoints.length - 1; i++) {
+                const p1 = trailPoints[i];
+                const p2 = trailPoints[i + 1];
+                
+                ctx.beginPath();
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                
+                const opacity = i / trailPoints.length;
+                ctx.lineWidth = 2; 
+                ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+                ctx.stroke();
+            }
+
+            requestAnimationFrame(render);
+        }
+        render();
+    </script>
+</body>
+</html>

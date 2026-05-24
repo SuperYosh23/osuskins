@@ -1,0 +1,94 @@
+{
+  "subtitle": "Random osu!-related stuff I've been working on :P",
+  "socials": [],
+  "items": [
+    {
+      "id": "yosh-mashup-pack",
+      "version": "both",
+      "type": ["layout", "skin"],
+      "title": "Yosh Mashup Pack",
+      "desc": "A mix of multiple assets to make the ultimate skin. Uses my cutom lazer layout v4. My daily driver.",
+      "tags": ["Mashup", "Info"],
+      "image": "https://yoshosu.neocities.org/eugh.jpg",
+      "link": "https://github.com/SuperYosh23/osuskins/raw/refs/heads/main/Yosh%20Mashup%20Pack%20v4.5.osk",
+      "btnText": "Download"
+    },
+    {
+      "id": "yosh-mashup-pack-simple",
+      "version": "both",
+      "type": ["layout", "skin"],
+      "title": "Yosh Mashup Pack Simple",
+      "desc": "VERY OUTDATED, WILL NOT BE UPDATED! A mix of multiple skins, to make the ultimate skin. Uses a simple version of my cutom layout v3.",
+      "tags": ["Mashup", "Simple"],
+      "image": "https://yoshosu.neocities.org/WEO.jpg",
+      "link": "https://github.com/SuperYosh23/osuskins/raw/refs/heads/main/Yosh%20Mashup%20Pack%20v3.11%20Simple.osk",
+      "btnText": "Download"
+    },
+    {
+      "id": "yosh-argon-pro",
+      "version": "lazer",
+      "type": "layout",
+      "title": "YoshArgonPro",
+      "desc": "My custom layout v1, using the argon pro skin.",
+      "tags": ["Info", "Argon"],
+      "image": "argon.png",
+      "link": "https://github.com/SuperYosh23/osuskins/raw/refs/heads/main/YoshArgonPro.osk",
+      "btnText": "Download"
+    },
+    {
+      "id": "yosh-triangles-v2",
+      "version": "lazer",
+      "type": "layout",
+      "title": "YoshTriangles (v2)",
+      "desc": "My custom layout v1, using the triangles skin.",
+      "tags": ["Info", "Triangles"],
+      "image": "tri2.png",
+      "link": "https://github.com/SuperYosh23/osuskins/raw/refs/heads/main/YoshTrianglesv2.osk",
+      "btnText": "Download"
+    },
+    {
+      "id": "kawa-editor",
+      "version": "both",
+      "type": "tool",
+      "title": "Kawa Editor",
+      "desc": "A skin editor. Was abandoned a while back and is very jank.",
+      "tags": ["Skins", "Tools"],
+      "image": "kawa.png",
+      "link": "https://superyosh23.github.io/KawaEditor/",
+      "btnText": "Open"
+    },
+    {
+      "id": "yosh-yugen",
+      "version": "lazer",
+      "type": "layout",
+      "title": "YoshYugen",
+      "desc": "My custom layout v1, using the Yugen skin.",
+      "tags": ["Info", "Yugen"],
+      "image": "yugen.png",
+      "link": "https://github.com/SuperYosh23/osuskins/raw/refs/heads/main/YoshYugen.osk",
+      "btnText": "Download"
+    },
+    {
+      "id": "yosh-yugen-plus",
+      "version": "lazer",
+      "type": "layout",
+      "title": "YoshYugenPlus",
+      "desc": "My custom layout v1, using a mix of the Yugen skin and the Triangles skin. My previous daily driver.",
+      "tags": ["Info", "Yugen"],
+      "image": "yugenplus.png",
+      "link": "https://github.com/SuperYosh23/osuskins/raw/refs/heads/main/YoshYugenPlus.osk",
+      "btnText": "Download"
+    },
+    {
+      "id": "yosh-triangles-v1",
+      "version": "lazer",
+      "type": "layout",
+      "title": "YoshTriangles (v1)",
+      "desc": "An old iteration of my custom layout (v0.5), using the triangles skin.",
+      "tags": ["Info", "Triangles"],
+      "image": "tri.png",
+      "link": "https://github.com/SuperYosh23/osuskins/raw/refs/heads/main/YoshTrianglesv1.osk",
+      "btnText": "Download"
+    }
+  ]
+}
