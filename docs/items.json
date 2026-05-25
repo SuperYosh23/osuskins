@@ -3,6 +3,17 @@
   "socials": [],
   "items": [
     {
+      "id": "project-neuria",
+      "version": "lazer",
+      "type": ["layout", "skin"],
+      "title": "Project Neuria",
+      "desc": "A brand new Lazer HUD and skin. Based on Yosh Mashup Pack.",
+      "tags": ["Custom", "Skin", "HUD", "Interface"],
+      "image": "neuria.jpg",
+      "link": "https://github.com/SuperYosh23/osuskins/raw/refs/heads/main/PROJECT%20NEURIA%20v1%20(SuperYosh23).osk",
+      "btnText": "Download"
+    },
+    {
       "id": "yosh-mashup-pack",
       "version": "both",
       "type": ["layout", "skin"],
