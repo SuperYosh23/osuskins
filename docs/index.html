@@ -241,7 +241,7 @@
         <div class="mt-4 flex flex-wrap justify-center gap-3">
             <button onclick="app.filterType('all')" class="viso-btn viso-btn-primary type-btn active skew-x-[-10deg]">All</button>
             <button onclick="app.filterType('skin')" class="viso-btn viso-btn-secondary type-btn skew-x-[-10deg] hover:border-pink-500 hover:text-pink-400">Skins</button>
-            <button onclick="app.filterType('layout')" class="viso-btn viso-btn-secondary type-btn skew-x-[-10deg] hover:border-purple-500 hover:text-purple-400">Layouts</button>
+            <button id="layout-btn" onclick="app.filterType('layout')" class="viso-btn viso-btn-secondary type-btn skew-x-[-10deg] hover:border-purple-500 hover:text-purple-400">Layouts</button>
             <button onclick="app.filterType('tool')" class="viso-btn viso-btn-secondary type-btn skew-x-[-10deg] hover:border-blue-500 hover:text-blue-400">Tools</button>
         </div>
     </header>
@@ -386,19 +386,20 @@
             
             init: async () => {
                 try {
-                    const response = await fetch('items.json');
+                    const response = await fetch('items.json?t=' + Date.now());
                     const data = await response.json();
                     db = data;
+                    console.log('Loaded items:', db.items);
                 } catch (error) {
                     console.error('Error loading items:', error);
                 }
-                
+
                 document.getElementById('hero-subtitle').innerText = db.subtitle;
                 const socialContainer = document.getElementById('nav-socials');
                 db.socials.forEach(s => {
                     if(s.name) socialContainer.innerHTML += `<a href="${s.url}" target="_blank" class="hover:text-white uppercase tracking-widest text-xs">${s.name}</a>`;
                 });
-                
+
                 // Only filter after data is loaded
                 if (db.items && db.items.length > 0) {
                     app.applyFilters();
@@ -407,7 +408,12 @@
 
             filterVersion: (version) => {
                 app.currentVersion = version;
+                // If switching away from lazer and current type is layout, reset to all
+                if (version !== 'lazer' && app.currentType === 'layout') {
+                    app.currentType = 'all';
+                }
                 app.updateVersionButtons();
+                app.updateTypeButtons();
                 app.applyFilters();
             },
 
@@ -434,17 +440,30 @@
                         btn.className = `viso-btn viso-btn-secondary version-btn skew-x-[-10deg] ${hoverClasses}`;
                     }
                 });
+
+                // Hide/show Layouts button based on version
+                const layoutBtn = document.getElementById('layout-btn');
+                if (layoutBtn) {
+                    layoutBtn.style.display = app.currentVersion === 'lazer' ? 'inline-block' : 'none';
+                }
             },
 
             updateTypeButtons: () => {
                 document.querySelectorAll('.type-btn').forEach(btn => {
+                    // Skip hidden buttons
+                    if (btn.style.display === 'none') return;
+
                     const txt = btn.innerText.toLowerCase();
                     const isSkinBtn = txt === 'skins';
                     const isLayoutBtn = txt === 'layouts';
                     const isToolBtn = txt === 'tools';
                     const isAllBtn = txt === 'all';
 
-                    if (txt === app.currentType || (app.currentType === 'all' && isAllBtn)) {
+                    // Map plural button text to singular filter type
+                    const typeMap = { 'skins': 'skin', 'layouts': 'layout', 'tools': 'tool', 'all': 'all' };
+                    const filterType = typeMap[txt] || txt;
+
+                    if (filterType === app.currentType || (app.currentType === 'all' && isAllBtn)) {
                         btn.className = "viso-btn viso-btn-primary type-btn active skew-x-[-10deg]";
                     } else {
                         let hoverClasses = "hover:border-zinc-500 hover:text-white";
