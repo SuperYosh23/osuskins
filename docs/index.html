@@ -61,6 +61,11 @@
             transform: scale(0.75) !important;
         }
 
+        /* Lazer cursor shrinks less when clicked */
+        #custom-cursor.lazer.clicking #cursor-scaler {
+            transform: scale(1.5) !important;
+        }
+
         /* Layer 2: The Spinner (The actual image) */
         #cursor-img {
             width: 80px; 
@@ -400,6 +405,9 @@
                     if(s.name) socialContainer.innerHTML += `<a href="${s.url}" target="_blank" class="hover:text-white uppercase tracking-widest text-xs">${s.name}</a>`;
                 });
 
+                // Initialize cursor based on default version
+                app.updateVersionButtons();
+
                 // Only filter after data is loaded
                 if (db.items && db.items.length > 0) {
                     app.applyFilters();
@@ -445,6 +453,25 @@
                 const layoutBtn = document.getElementById('layout-btn');
                 if (layoutBtn) {
                     layoutBtn.style.display = app.currentVersion === 'lazer' ? 'inline-block' : 'none';
+                }
+
+                // Update cursor based on version
+                const cursorImg = document.getElementById('cursor-img');
+                const cursorCrosshair = document.getElementById('cursor-crosshair');
+                const cursorScaler = document.getElementById('cursor-scaler');
+                const cursorElement = document.getElementById('custom-cursor');
+                if (cursorImg && cursorCrosshair && cursorScaler && cursorElement) {
+                    if (app.currentVersion === 'lazer') {
+                        cursorImg.src = 'lazercur.png';
+                        cursorCrosshair.style.display = 'none';
+                        cursorScaler.style.transform = 'scale(2)';
+                        cursorElement.classList.add('lazer');
+                    } else {
+                        cursorImg.src = 'cursor.png';
+                        cursorCrosshair.style.display = 'block';
+                        cursorScaler.style.transform = 'scale(1)';
+                        cursorElement.classList.remove('lazer');
+                    }
                 }
             },
 
