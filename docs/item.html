@@ -53,10 +53,20 @@
             transform: scale(0.75) !important;
         }
 
+        /* Lazer cursor shrinks less when clicked */
+        #custom-cursor.lazer.clicking #cursor-scaler {
+            transform: scale(1.8) !important;
+        }
+
         #cursor-img {
             width: 80px; 
             height: auto;
             animation: osuSpin 10s linear infinite; 
+        }
+
+        /* Disable spinning for lazer cursor */
+        #custom-cursor.lazer #cursor-img {
+            animation: none;
         }
 
         #cursor-crosshair {
@@ -383,6 +393,25 @@
                 document.getElementById('item-type').innerText = typeDisplay;
                 
                 document.getElementById('item-desc').innerText = item.longDesc || item.desc;
+                
+                // Apply lazer cursor if item is lazer-only
+                const cursorImg = document.getElementById('cursor-img');
+                const cursorCrosshair = document.getElementById('cursor-crosshair');
+                const cursorScaler = document.getElementById('cursor-scaler');
+                const cursorElement = document.getElementById('custom-cursor');
+                if (cursorImg && cursorCrosshair && cursorScaler && cursorElement) {
+                    if (item.version === 'lazer') {
+                        cursorImg.src = 'lazercur.png';
+                        cursorCrosshair.style.display = 'none';
+                        cursorScaler.style.transform = 'scale(2)';
+                        cursorElement.classList.add('lazer');
+                    } else {
+                        cursorImg.src = 'cursor.png';
+                        cursorCrosshair.style.display = 'block';
+                        cursorScaler.style.transform = 'scale(1)';
+                        cursorElement.classList.remove('lazer');
+                    }
+                }
                 
                 // Handle images - support both old single image and new images array format
                 let images = [];
