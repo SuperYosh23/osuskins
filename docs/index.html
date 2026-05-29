@@ -532,9 +532,18 @@
                     let imageContent;
                     let imageSource = null;
 
-                    if (item.image && item.image.length > 5) {
-                        imageContent = `<img src="${item.image}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 group-hover:rotate-1">`;
-                        imageSource = item.image;
+                    // Handle both old single image and new images array format
+                    let imageUrl = null;
+                    if (item.images && Array.isArray(item.images) && item.images.length > 0) {
+                        const primaryImage = item.images.find(img => img.primary) || item.images[0];
+                        imageUrl = primaryImage.src;
+                    } else if (item.image && item.image.length > 5) {
+                        imageUrl = item.image;
+                    }
+
+                    if (imageUrl) {
+                        imageContent = `<img src="${imageUrl}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 group-hover:rotate-1">`;
+                        imageSource = imageUrl;
                     } else {
                         // Handle gradient colors for multiple types
                         let colors;

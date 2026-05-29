@@ -221,6 +221,7 @@
                 <div id="item-image-container" class="h-96 relative overflow-hidden bg-zinc-900 border-b border-white/5 cursor-pointer" onclick="app.openImage()">
                     <img id="item-image" src="" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
                 </div>
+                <div id="image-gallery" class="flex gap-2 p-3 bg-zinc-900/50 border-t border-white/5 overflow-x-auto"></div>
             </div>
             
             <div class="solid-card p-8 flex flex-col">
@@ -381,14 +382,51 @@
                 const typeDisplay = Array.isArray(item.type) ? item.type.join(' + ') : item.type;
                 document.getElementById('item-type').innerText = typeDisplay;
                 
-                document.getElementById('item-desc').innerText = item.desc;
+                document.getElementById('item-desc').innerText = item.longDesc || item.desc;
+                
+                // Handle images - support both old single image and new images array format
+                let images = [];
+                if (item.images && Array.isArray(item.images)) {
+                    images = item.images;
+                } else if (item.image && item.image.length > 5) {
+                    images = [{ src: item.image, primary: true }];
+                }
+                
+                app.images = images;
                 
                 const imageEl = document.getElementById('item-image');
-                if (item.image && item.image.length > 5) {
-                    imageEl.src = item.image;
+                const galleryContainer = document.getElementById('image-gallery');
+                galleryContainer.innerHTML = '';
+                
+                if (images.length > 0) {
+                    // Find primary image or use first one
+                    const primaryImage = images.find(img => img.primary) || images[0];
+                    imageEl.src = primaryImage.src;
                     imageEl.style.display = 'block';
+                    app.currentImage = primaryImage.src;
+                    
+                    // Create thumbnail gallery
+                    if (images.length > 1) {
+                        images.forEach((img, index) => {
+                            const thumb = document.createElement('div');
+                            thumb.className = 'flex-shrink-0 w-20 h-20 rounded cursor-pointer overflow-hidden border-2 transition-all hover:border-pink-500';
+                            thumb.style.borderColor = img.src === primaryImage.src ? '#ec4899' : 'rgba(255,255,255,0.1)';
+                            thumb.innerHTML = `<img src="${img.src}" class="w-full h-full object-cover">`;
+                            thumb.onclick = (e) => {
+                                e.stopPropagation();
+                                app.setMainImage(img.src);
+                                // Update thumbnail borders
+                                document.querySelectorAll('#image-gallery > div').forEach(t => {
+                                    t.style.borderColor = 'rgba(255,255,255,0.1)';
+                                });
+                                thumb.style.borderColor = '#ec4899';
+                            };
+                            galleryContainer.appendChild(thumb);
+                        });
+                    }
                 } else {
                     imageEl.style.display = 'none';
+                    app.currentImage = null;
                 }
                 
                 const tagsContainer = document.getElementById('item-tags');
@@ -406,8 +444,13 @@
                 linkEl.href = item.link;
                 linkEl.innerText = item.btnText || 'Download';
                 
-                app.currentImage = item.image;
                 app.currentTitle = item.title;
+            },
+            
+            setMainImage: (src) => {
+                const imageEl = document.getElementById('item-image');
+                imageEl.src = src;
+                app.currentImage = src;
             },
 
             openImage: () => {

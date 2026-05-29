@@ -7,10 +7,15 @@
       "version": "lazer",
       "type": ["layout", "skin"],
       "title": "Project Neuria",
-      "desc": "A brand new Lazer HUD and skin. Based on Yosh Mashup Pack.",
+      "desc": "A brand new Lazer HUD and skin. Thanks to Syvatzia!",
+      "longDesc": "A brand new clean and modern Lazer-only HUD and skin. HUGE thank you to Syvatzia! This skin would be a mess without her help and feedback! Go check out her stream at https://www.twitch.tv/syvatzia",
       "tags": ["Custom", "Skin", "HUD", "Interface"],
-      "image": "neuria.jpg",
-      "link": "https://github.com/SuperYosh23/osuskins/raw/refs/heads/main/PROJECT%20NEURIA%20v1%20(SuperYosh23).osk",
+      "images": [
+        {"src": "neuria.jpg", "primary": true},
+        {"src": "neuria2.jpg", "primary": false},
+        {"src": "neuria3.jpg", "primary": false}
+      ],
+      "link": "https://github.com/SuperYosh23/osuskins/raw/refs/heads/main/PROJECT%20NEURIA%20v2%20(SuperYosh23,%20Syvatzia).osk",
       "btnText": "Download"
     },
     {
