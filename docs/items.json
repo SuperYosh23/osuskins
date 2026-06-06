@@ -3,10 +3,42 @@
   "socials": [],
   "items": [
     {
+      "id": "delta-neuria-first-edition",
+      "version": "lazer",
+      "type": ["skin", "layout"],
+      "title": "Delta Neuria First Edition",
+      "desc": "The Project Neuria Layout with some of the Delta 4 skin elements.",
+      "longDesc": "The Project Neuria Layout with some of the Delta 4 skin elements. Now with CTB support!",
+      "tags": ["neuria", "HUD", "clean"],
+      "images": [
+        {"src": "poster.png", "primary": true},
+        {"src": "dtnug.jpg", "primary": false},
+        {"src": "dtnum.jpg", "primary": false}
+      ],
+      "link": "https://github.com/SuperYosh23/osuskins/raw/refs/heads/main/dv1.osk",
+      "btnText": "Download"
+    },
+    {
+      "id": "project-neuria-third-edition",
+      "version": "lazer",
+      "type": ["skin", "layout"],
+      "title": "Project Neuria Third Edition",
+      "desc": "The third and final version of Project Neuria. Thanks to Syvatzia!",
+      "longDesc": "A brand new clean and modern Lazer-only HUD and skin. This update features a slightly refined layout and skin.HUGE thank you to Syvatzia! This skin would be a mess without her help and feedback! Go check out her stream at https://www.twitch.tv/syvatzia",
+      "tags": ["neuria", "HUD", "clean"],
+      "images": [
+        {"src": "neuria.jpg", "primary": true},
+        {"src": "pjnug.jpg", "primary": false},
+        {"src": "pjnum.jpg", "primary": false}
+      ],
+      "link": "https://github.com/SuperYosh23/osuskins/raw/refs/heads/main/nv3.osk",
+      "btnText": "Download"
+    },
+    {
       "id": "project-neuria",
       "version": "lazer",
       "type": ["layout", "skin"],
-      "title": "Project Neuria",
+      "title": "Project Neuria v2",
       "desc": "A brand new Lazer HUD and skin. Thanks to Syvatzia!",
       "longDesc": "A brand new clean and modern Lazer-only HUD and skin. HUGE thank you to Syvatzia! This skin would be a mess without her help and feedback! Go check out her stream at https://www.twitch.tv/syvatzia",
       "tags": ["Custom", "Skin", "HUD", "Interface"],
