@@ -3,17 +3,73 @@
   "socials": [],
   "items": [
     {
+      "id": "delta-neuria-2",
+      "title": "Delta Neuria Seccond Edition",
+      "version": "lazer",
+      "type": [
+        "skin",
+        "layout"
+      ],
+      "desc": "A brand new layout with elements of the Delta 4 skin.",
+      "longDesc": "A brand new layout with elements of the Delta 4 skin. Now with CTB support! Huge thank you to Syvatzia, could not have done this without her help. Check out her stream at https://www.twitch.tv/syvatzia and give her a follow!",
+      "tags": [
+        "clean",
+        "HUD",
+        "delta"
+      ],
+      "link": "https://github.com/SuperYosh23/osuskins/raw/refs/heads/main/Delta Neuria Seccond Edition (Iceotaku, SuperYosh23, Syvatzia).osk",
+      "btnText": "Download",
+      "images": [
+        {
+          "src": "poster.png",
+          "primary": true
+        },
+        {
+          "src": "title.jpg",
+          "primary": false
+        },
+        {
+          "src": "ss.jpg",
+          "primary": false
+        },
+        {
+          "src": "stdmode.jpg",
+          "primary": false
+        },
+        {
+          "src": "ctb.jpg",
+          "primary": false
+        }
+      ]
+    },
+    {
       "id": "delta-neuria-first-edition",
       "version": "lazer",
-      "type": ["skin", "layout"],
+      "type": [
+        "skin",
+        "layout"
+      ],
       "title": "Delta Neuria First Edition",
       "desc": "The Project Neuria Layout with some of the Delta 4 skin elements.",
       "longDesc": "The Project Neuria Layout with some of the Delta 4 skin elements. Now with CTB support!",
-      "tags": ["neuria", "HUD", "clean"],
+      "tags": [
+        "neuria",
+        "HUD",
+        "clean"
+      ],
       "images": [
-        {"src": "poster.png", "primary": true},
-        {"src": "dtnug.jpg", "primary": false},
-        {"src": "dtnum.jpg", "primary": false}
+        {
+          "src": "poster.png",
+          "primary": true
+        },
+        {
+          "src": "dtnug.jpg",
+          "primary": false
+        },
+        {
+          "src": "dtnum.jpg",
+          "primary": false
+        }
       ],
       "link": "https://github.com/SuperYosh23/osuskins/raw/refs/heads/main/dv1.osk",
       "btnText": "Download"
@@ -21,15 +77,31 @@
     {
       "id": "project-neuria-third-edition",
       "version": "lazer",
-      "type": ["skin", "layout"],
+      "type": [
+        "skin",
+        "layout"
+      ],
       "title": "Project Neuria Third Edition",
       "desc": "The third and final version of Project Neuria. Thanks to Syvatzia!",
       "longDesc": "A brand new clean and modern Lazer-only HUD and skin. This update features a slightly refined layout and skin.HUGE thank you to Syvatzia! This skin would be a mess without her help and feedback! Go check out her stream at https://www.twitch.tv/syvatzia",
-      "tags": ["neuria", "HUD", "clean"],
+      "tags": [
+        "neuria",
+        "HUD",
+        "clean"
+      ],
       "images": [
-        {"src": "neuria.jpg", "primary": true},
-        {"src": "pjnug.jpg", "primary": false},
-        {"src": "pjnum.jpg", "primary": false}
+        {
+          "src": "neuria.jpg",
+          "primary": true
+        },
+        {
+          "src": "pjnug.jpg",
+          "primary": false
+        },
+        {
+          "src": "pjnum.jpg",
+          "primary": false
+        }
       ],
       "link": "https://github.com/SuperYosh23/osuskins/raw/refs/heads/main/nv3.osk",
       "btnText": "Download"
@@ -37,15 +109,32 @@
     {
       "id": "project-neuria",
       "version": "lazer",
-      "type": ["layout", "skin"],
+      "type": [
+        "layout",
+        "skin"
+      ],
       "title": "Project Neuria v2",
       "desc": "A brand new Lazer HUD and skin. Thanks to Syvatzia!",
       "longDesc": "A brand new clean and modern Lazer-only HUD and skin. HUGE thank you to Syvatzia! This skin would be a mess without her help and feedback! Go check out her stream at https://www.twitch.tv/syvatzia",
-      "tags": ["Custom", "Skin", "HUD", "Interface"],
+      "tags": [
+        "Custom",
+        "Skin",
+        "HUD",
+        "Interface"
+      ],
       "images": [
-        {"src": "neuria.jpg", "primary": true},
-        {"src": "neuria2.jpg", "primary": false},
-        {"src": "neuria3.jpg", "primary": false}
+        {
+          "src": "neuria.jpg",
+          "primary": true
+        },
+        {
+          "src": "neuria2.jpg",
+          "primary": false
+        },
+        {
+          "src": "neuria3.jpg",
+          "primary": false
+        }
       ],
       "link": "https://github.com/SuperYosh23/osuskins/raw/refs/heads/main/PROJECT%20NEURIA%20v2%20(SuperYosh23,%20Syvatzia).osk",
       "btnText": "Download"
@@ -53,10 +142,16 @@
     {
       "id": "yosh-mashup-pack",
       "version": "both",
-      "type": ["layout", "skin"],
+      "type": [
+        "layout",
+        "skin"
+      ],
       "title": "Yosh Mashup Pack",
       "desc": "A mix of multiple assets to make the ultimate skin. Uses my cutom lazer layout v4. My daily driver.",
-      "tags": ["Mashup", "Info"],
+      "tags": [
+        "Mashup",
+        "Info"
+      ],
       "image": "https://yoshosu.neocities.org/eugh.jpg",
       "link": "https://github.com/SuperYosh23/osuskins/raw/refs/heads/main/Yosh%20Mashup%20Pack%20v4.5.osk",
       "btnText": "Download"
@@ -64,10 +159,16 @@
     {
       "id": "yosh-mashup-pack-simple",
       "version": "both",
-      "type": ["layout", "skin"],
+      "type": [
+        "layout",
+        "skin"
+      ],
       "title": "Yosh Mashup Pack Simple",
       "desc": "VERY OUTDATED, WILL NOT BE UPDATED! A mix of multiple skins, to make the ultimate skin. Uses a simple version of my cutom layout v3.",
-      "tags": ["Mashup", "Simple"],
+      "tags": [
+        "Mashup",
+        "Simple"
+      ],
       "image": "https://yoshosu.neocities.org/WEO.jpg",
       "link": "https://github.com/SuperYosh23/osuskins/raw/refs/heads/main/Yosh%20Mashup%20Pack%20v3.11%20Simple.osk",
       "btnText": "Download"
@@ -78,7 +179,10 @@
       "type": "layout",
       "title": "YoshArgonPro",
       "desc": "My custom layout v1, using the argon pro skin.",
-      "tags": ["Info", "Argon"],
+      "tags": [
+        "Info",
+        "Argon"
+      ],
       "image": "argon.png",
       "link": "https://github.com/SuperYosh23/osuskins/raw/refs/heads/main/YoshArgonPro.osk",
       "btnText": "Download"
@@ -89,7 +193,10 @@
       "type": "layout",
       "title": "YoshTriangles (v2)",
       "desc": "My custom layout v1, using the triangles skin.",
-      "tags": ["Info", "Triangles"],
+      "tags": [
+        "Info",
+        "Triangles"
+      ],
       "image": "tri2.png",
       "link": "https://github.com/SuperYosh23/osuskins/raw/refs/heads/main/YoshTrianglesv2.osk",
       "btnText": "Download"
@@ -100,7 +207,10 @@
       "type": "tool",
       "title": "Kawa Editor",
       "desc": "A skin editor. Was abandoned a while back and is very jank.",
-      "tags": ["Skins", "Tools"],
+      "tags": [
+        "Skins",
+        "Tools"
+      ],
       "image": "kawa.png",
       "link": "https://superyosh23.github.io/KawaEditor/",
       "btnText": "Open"
@@ -111,7 +221,10 @@
       "type": "layout",
       "title": "YoshYugen",
       "desc": "My custom layout v1, using the Yugen skin.",
-      "tags": ["Info", "Yugen"],
+      "tags": [
+        "Info",
+        "Yugen"
+      ],
       "image": "yugen.png",
       "link": "https://github.com/SuperYosh23/osuskins/raw/refs/heads/main/YoshYugen.osk",
       "btnText": "Download"
@@ -122,7 +235,10 @@
       "type": "layout",
       "title": "YoshYugenPlus",
       "desc": "My custom layout v1, using a mix of the Yugen skin and the Triangles skin. My previous daily driver.",
-      "tags": ["Info", "Yugen"],
+      "tags": [
+        "Info",
+        "Yugen"
+      ],
       "image": "yugenplus.png",
       "link": "https://github.com/SuperYosh23/osuskins/raw/refs/heads/main/YoshYugenPlus.osk",
       "btnText": "Download"
@@ -133,7 +249,10 @@
       "type": "layout",
       "title": "YoshTriangles (v1)",
       "desc": "An old iteration of my custom layout (v0.5), using the triangles skin.",
-      "tags": ["Info", "Triangles"],
+      "tags": [
+        "Info",
+        "Triangles"
+      ],
       "image": "tri.png",
       "link": "https://github.com/SuperYosh23/osuskins/raw/refs/heads/main/YoshTrianglesv1.osk",
       "btnText": "Download"

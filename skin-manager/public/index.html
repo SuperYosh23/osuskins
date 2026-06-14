@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skin Manager</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🎨 Skin Manager</h1>
+      <button id="addBtn" class="btn btn-primary">+ Add New Skin</button>
+    </header>
+
+    <div id="skinList" class="skin-list"></div>
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="modalTitle">Add New Skin</h2>
+        <form id="skinForm">
+          <input type="hidden" id="editIndex" value="-1">
+          
+          <div class="form-group">
+            <label for="id">ID:</label>
+            <input type="text" id="id" required placeholder="e.g., my-skin-name">
+          </div>
+
+          <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" id="title" required placeholder="e.g., My Awesome Skin">
+          </div>
+
+          <div class="form-group">
+            <label for="version">Version:</label>
+            <select id="version" required>
+              <option value="lazer">lazer</option>
+              <option value="both">both</option>
+              <option value="stable">stable</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="type">Type (select multiple):</label>
+            <select id="type" multiple required>
+              <option value="skin">skin</option>
+              <option value="layout">layout</option>
+              <option value="tool">tool</option>
+            </select>
+            <small>Hold Ctrl/Cmd to select multiple types</small>
+          </div>
+
+          <div class="form-group">
+            <label for="desc">Description:</label>
+            <textarea id="desc" rows="2" required placeholder="Short description"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="longDesc">Long Description:</label>
+            <textarea id="longDesc" rows="4" placeholder="Detailed description (optional)"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="tags">Tags (comma-separated):</label>
+            <input type="text" id="tags" placeholder="e.g., clean, HUD, modern">
+          </div>
+
+          <div class="form-group">
+            <label for="link">Download Link:</label>
+            <input type="url" id="link" placeholder="https://...">
+            <small>Or upload a skin file below</small>
+          </div>
+
+          <div class="form-group">
+            <label for="skinFile">Upload Skin File (.osk):</label>
+            <input type="file" id="skinFile" accept=".osk">
+            <small>Uploads to root directory and auto-fills the link</small>
+          </div>
+
+          <div class="form-group">
+            <label for="btnText">Button Text:</label>
+            <input type="text" id="btnText" value="Download" required>
+          </div>
+
+          <div class="form-group">
+            <label for="image">Image (single filename or URL):</label>
+            <input type="text" id="image" placeholder="e.g., poster.png or https://...">
+          </div>
+
+          <div class="form-group">
+            <label for="imageFile">Upload Single Image to docs/:</label>
+            <input type="file" id="imageFile" accept="image/*">
+            <small>Uploads to docs/ and auto-fills the image field above</small>
+          </div>
+
+          <div class="form-group">
+            <label for="images">Images (JSON array for multiple):</label>
+            <textarea id="images" rows="3" placeholder='[{"src": "poster.png", "primary": true}]'></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Image Manager:</label>
+            <div id="imageManager" class="image-manager">
+              <p class="no-images">No images added yet. Upload images or add manually above.</p>
+            </div>
+            <button type="button" id="loadImagesBtn" class="btn btn-secondary" style="margin-top: 10px;">Load Images from JSON</button>
+          </div>
+
+          <div class="form-group">
+            <label for="imageFiles">Upload Multiple Images to docs/:</label>
+            <input type="file" id="imageFiles" accept="image/*" multiple>
+            <small>Uploads to docs/ and auto-fills the images field above</small>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
